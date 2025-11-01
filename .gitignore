@@ -15,14 +15,21 @@
 # Environment files
 /.env
 
+/IDE
+/.idea
+
 # Angular CLI and build artefacts
 /.angular-cli.json
 /.ng/
+/.nx/
 
 # TypeScript cache
 *.tsbuildinfo
 
 # Logs
+error.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.angular
