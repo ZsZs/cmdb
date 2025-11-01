@@ -1,0 +1,9 @@
+{
+  "name": "dlbo-cicd",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dlbo-cicd",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project dlbo-cicd --web",
+  "targets": {}
+}

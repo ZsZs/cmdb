@@ -1,0 +1,90 @@
+{
+  "name": "cmdb-frontend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "cmdb",
+  "sourceRoot": "apps/cmdb-frontend/src",
+  "tags": ["scope:cmdb", "type:app"],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/cmdb-frontend",
+        "browser": "apps/cmdb-frontend/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/cmdb-frontend/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/cmdb-frontend/public"
+          }
+        ],
+        "styles": ["apps/cmdb-frontend/src/styles.css"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@angular/build:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "cmdb-frontend:build:production"
+        },
+        "development": {
+          "buildTarget": "cmdb-frontend:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular/build:extract-i18n",
+      "options": {
+        "buildTarget": "cmdb-frontend:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/cmdb-frontend/jest.config.ts",
+        "tsConfig": "apps/cmdb-frontend/tsconfig.spec.json"
+      }
+    },
+    "serve-static": {
+      "continuous": true,
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "cmdb-frontend:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/cmdb-frontend/browser",
+        "spa": true
+      }
+    }
+  }
+}
